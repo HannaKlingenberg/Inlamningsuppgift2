@@ -5,58 +5,68 @@ import java.util.Scanner;
 
 public class Inlamningsuppgift {
 
-    public static void main(String[] args) {
-       /* try {
-            Inlamningsuppgift uppgift = new Inlamningsuppgift();
-            uppgift.run();
-        }*/
 
+    public void charToMorse() {
         Converter converter = new Converter();
         boolean keepgoing = true;
 
-        while (keepgoing) { // while tills man får godkänd input
+        while (keepgoing) { // Loopar metoden tills den får godkänd input
             String myEngChar = ask("Please write an english letter or a number between 0-9.");
-            if (converter.getMorseChar(myEngChar) == null) { // Felhantering
+            if (converter.getMorseCode(myEngChar) == null) { // Felhantering av input som inte finns i mapen
                 System.out.println("Sorry, that didn't work. Please try again.");
             } else {
-                System.out.println("Your input corresponds to " + converter.getMorseChar(myEngChar) + " in Morse code.");
+                System.out.println("Your input corresponds to " + converter.getMorseCode(myEngChar) + " in Morse code.");
+                keepgoing = false; // Efter godkänd input sätts keepgoing till false för att avbryta loopen
+            }
+        }
+    }
+
+    public void morseToChar() {
+        Converter converter = new Converter();
+        boolean keepgoing = true;
+
+        keepgoing = true; // keepgoing måste sättas till true igen
+        while (keepgoing) {
+            String myMorseCode = ask("Please write some morse code.");
+            if (converter.getEngChar(myMorseCode) == null) {
+                System.out.println("Sorry, that didn't work. Please try again.");
+            } else {
+                System.out.println("Your morse code corresponds to " + converter.getEngChar(myMorseCode) +
+                        " in the english alphabet.");
                 keepgoing = false;
             }
         }
+    }
+
+
+    public void wordToMorse() {
+        Converter converter = new Converter();
+        boolean keepgoing = true;
 
         keepgoing = true;
         while (keepgoing) {
-            String myMorseChar = ask("Please write some morse code.");
-            if (converter.getEngChar(myMorseChar) == null) {
-                System.out.println("Sorry, that didn't work. Please try again.");
-            } else {
-                System.out.println("Your morse code corresponds to " + converter.getEngChar(myMorseChar) + " in the english alphabet.");
-                keepgoing = false;
-            }
-        }
-
-        keepgoing = true;
-        while (keepgoing) {
-            String myEngWord = ask("Please write a word in english.");
-           if (converter.getMorseWord(myEngWord) == null) {
+            String myEngWord = ask("Please write a word in English.");
+            if (converter.getMorseWord(myEngWord) == null) {
                 System.out.println("Sorry, that didn't work. Please try again.");
             } else {
                 System.out.println("Your word corresponds to " + converter.getMorseWord(myEngWord));
                 keepgoing = false;
             }
         }
+    }
+
+    public void morseToWord() {
+        Converter converter = new Converter();
+        boolean keepgoing = true;
 
         keepgoing = true;
         while (keepgoing) {
-            try {
-                String myMorseChar = ask("Please write some morse code again.");
-                System.out.println("Your morse code corresponds to " + converter.getEngChar(myMorseChar) + " in the english alphabet.");
+            String myMorseWord = ask("Please write a word in Morse Code, separate code with ' '.");
+            if (converter.getEngWord(myMorseWord) == null) {
+                System.out.println("Sorry, that didn't work. Please try again.");
+            } else {
+                System.out.println("Your word corresponds to " + converter.getEngWord(myMorseWord));
                 keepgoing = false;
-            } catch (NoSuchElementException e) { // Felhantering (ctrl D)
-                System.out.println(e);
-                System.out.println("Ooooppps, you broke it, bye bye!");
-                break; // bryter efter felmeddelandet men det vill jag ju inte
-
             }
         }
     }
@@ -65,5 +75,20 @@ public class Inlamningsuppgift {
         Scanner scan = new Scanner(System.in);
         System.out.println(question);
         return scan.nextLine();
+    }
+
+    public static void main(String[] args) {
+        try {
+            Inlamningsuppgift uppgift = new Inlamningsuppgift();
+
+            uppgift.charToMorse();
+            uppgift.morseToChar();
+            uppgift.wordToMorse();
+            uppgift.morseToWord();
+
+        } catch (NoSuchElementException e) { // Felhantering av input som signalerar att det inte kommer komma mer input
+            System.out.println(e);
+            System.out.println("Ooooppps, you broke it, bye bye!");
+        }
     }
 }

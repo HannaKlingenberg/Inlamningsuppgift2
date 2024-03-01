@@ -1,6 +1,5 @@
 package inlamningsuppgift;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Converter {
@@ -51,106 +50,67 @@ public class Converter {
         engToMorse.put("!", "-.-.--");
 
 
-        for (String key : engToMorse.keySet()) {
-            morseToEng.put(engToMorse.get(key), key);
+        for (String key : engToMorse.keySet()) { // loppar igenom alla nycklar
+            morseToEng.put(engToMorse.get(key), key); // nyckel och värde byter plats
         }
     }
 
-    public String toLower(String myEngChar) {
-        return myEngChar.toLowerCase();
+   public String toLower(String myEngChar) { // byter ut versal mot motsvarande gemen
+        return myEngChar.toLowerCase(); // returnerar värdet
     }
 
-    public String getMorseChar(String myEngChar) {
-        myEngChar = toLower(myEngChar); // Felhantering
-        return engToMorse.get(myEngChar);
+    public String getMorseCode(String myEngChar) {
+        myEngChar = toLower(myEngChar); // Felhantering ifall användaren använt versaler
+        return engToMorse.get(myEngChar); // anropar mapen på det engelska tecknet användaren angett
+        // och returnerar värdet
     }
 
-    public String getEngChar(String myMorseChar) {
-        return morseToEng.get(myMorseChar);
+    public String getEngChar(String myMorseCode) {
+        return morseToEng.get(myMorseCode);
     }
 
     public String getMorseWord(String myEngWord) {
 
         //skapa en variabel att spara ordet i
-
         String morseWord = "";
 
-        //ta in ett ord på engelska och splitta det
+        //ta in ett ord på engelska och splitta det till en array av chars
         String[] engChars = myEngWord.split("");
 
         //loopa igenom arrayen
         for (String engChar : engChars) {
-            //hämta varje enskild char
-            //kolla om char == "" i så fall skicka felmeddelande
-            //ersätt bokstaven med morsekod och lägg till i morseWord
-            //bygg ihop morsekoden till ett ord och särskilj bokstäverna med blanksteg
 
+            //1.For varje enskild char
+            //2.kolla IF char inte finns i arrayen i så fall returnera null
+            //3.ELSE ersätt bokstaven med morsekod bygg ihop morsekoden till ett ord och särskilj bokstäverna med blanksteg
 
-            if (getMorseChar(engChar) == null) {
+            if (getMorseCode(engChar) == null) { // Felhantering
                 return null;
             } else {
-                morseWord += getMorseChar(engChar) + " ";
+                morseWord += getMorseCode(engChar) + " ";
 
             }
         }
+        //returnera
         return morseWord;
     }
+
+    public String getEngWord(String myMorseWord) {
+
+        String engWord = "";
+
+        String[] morseCodes = myMorseWord.split(" ");
+
+        for (String morseCode : morseCodes) {
+
+            if (getEngChar(morseCode) == null) {
+                return null;
+            } else {
+                engWord += getEngChar(morseCode);
+            }
+        }
+
+        return engWord;
+    }
+
 }
-
-
-
-/*  public String getEngWord(String myMorseWord) {
-        //skapa en variabel att spara ordet i
-        //ta in ett ord på engelska och splitta det
-        //loopa igenom ordet
-        //1hämta varje enskild bokstav
-        //2ersätt bokstaven med morsekod och lägg till i morseWord
-        //3bygg ihop morsekoden till ett ord och särskilj bokstäverna med blanksteg
-        //returnera variabeln
-
-    }*/
-
-/*
-    public Converter() {
-        morseToEng.put(".-", "a");
-        morseToEng.put("-...", "b");
-        morseToEng.put("-.-.", "c");
-        morseToEng.put("-..", "d");
-        morseToEng.put(".", "e");
-        morseToEng.put("..-.", "f");
-        morseToEng.put("--.", "g");
-        morseToEng.put("....", "h");
-        morseToEng.put("..", "i");
-        morseToEng.put(".---", "j");
-        morseToEng.put("-.-", "k");
-        morseToEng.put(".-..", "l");
-        morseToEng.put("--", "m");
-        morseToEng.put("-.", "n");
-        morseToEng.put("---", "o");
-        morseToEng.put(".--.", "p");
-        morseToEng.put("--.-", "q");
-        morseToEng.put(".-.", "r");
-        morseToEng.put("...", "s");
-        morseToEng.put("-", "t");
-        morseToEng.put("..-", "u");
-        morseToEng.put("...-", "v");
-        morseToEng.put(".--", "w");
-        morseToEng.put("-..-", "x");
-        morseToEng.put("-.--", "y");
-        morseToEng.put("--..", "z");
-        morseToEng.put(".----", "1");
-        morseToEng.put("..---", "2");
-        morseToEng.put("...--", "3");
-        morseToEng.put("....-", "4");
-        morseToEng.put(".....", "5");
-        morseToEng.put("-....", "6");
-        morseToEng.put("--...", "7");
-        morseToEng.put("---..", "8");
-        morseToEng.put("----.", "9");
-        morseToEng.put("-----", "0");
-        morseToEng.put(".-.-.-", ".");
-        morseToEng.put("--..--", ",");
-        morseToEng.put("..--..", "?");
-        morseToEng.put("-.-.--", "1");
-    }*/
-

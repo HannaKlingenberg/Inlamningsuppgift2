@@ -2,30 +2,28 @@ package inlamningsuppgift;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-
 import static org.junit.Assert.assertEquals;
 
 public class Testklass {
 
     @Test
-    public void charEngToMorse() {
+    public void engToMorseCode() {
         Converter converter = new Converter();
         String myEngChar = "a";
         String expected = ".-";
 
-        String actual = converter.getMorseChar(myEngChar);
+        String actual = converter.getMorseCode(myEngChar);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void charMorseToEng() {
+    public void morseCodeToEng() {
         Converter converter = new Converter();
-        String myMorseChar = ".-";
+        String myMorseCode = ".-";
         String expected = "a";
 
-        String actual = converter.getEngChar(myMorseChar);
+        String actual = converter.getEngChar(myMorseCode);
 
         assertEquals(expected, actual);
     }
@@ -33,7 +31,6 @@ public class Testklass {
     @Test
     public void toLower() {
         Converter converter = new Converter();
-
         String myEngChar = "A";
         String expected = "a";
 
@@ -43,22 +40,19 @@ public class Testklass {
     }
 
     @Test
-    public void upperCharEngToMorse() {
+    public void upperCharEngToMorseCode() {
         Converter converter = new Converter();
-
         String myEngChar = "Z";
         String expected = "--..";
 
-        String actual = converter.getMorseChar(myEngChar);
+        String actual = converter.getMorseCode(myEngChar);
 
         assertEquals(expected, actual);
     }
 
-
     @Test
     public void wordEngToMorse() {
         Converter converter = new Converter();
-
         String myEngWord = "ABC";
         String expected = ".- -... -.-. ";
 
@@ -66,11 +60,22 @@ public class Testklass {
 
         assertEquals(expected, actual);
     }
-    @Test
-    public void invalidWordEngToWord(){
-        Converter converter = new Converter();
 
-        String myEngWord = "H ann a";
+    @Test
+    public void wordMorseToEng() {
+        Converter converter = new Converter();
+        String myMorseWord = ".- -... -.-.";
+        String expected = "abc";
+
+        String actual = converter.getEngWord(myMorseWord);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void invalidWordEngToMorse(){
+        Converter converter = new Converter();
+        String myEngWord = "ha nn A";
         String expected = null;
 
         String actual = converter.getMorseWord(myEngWord);
@@ -78,15 +83,15 @@ public class Testklass {
         assertEquals(expected, actual);
     }
 
-    /*@Test
-    public void wordMorseToEng() {
+    @Test
+    public void invalidWordMorseToEng(){
         Converter converter = new Converter();
-        HashMap<String, String> morseToEng = new HashMap<String, String>();
-        String myMorseWord = ".- -... -.-. ";
-        String expected = "ABC";
+        String myMorseWord = "inte morse";
+        String expected = null;
 
         String actual = converter.getEngWord(myMorseWord);
 
         assertEquals(expected, actual);
-    }*/
+    }
+
 }
