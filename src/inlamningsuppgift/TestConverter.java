@@ -1,11 +1,9 @@
 package inlamningsuppgift;
 
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 
-public class Testklass {
-
+public class TestConverter {
     @Test
     public void engToMorseCode() {
         Converter converter = new Converter();
@@ -20,8 +18,8 @@ public class Testklass {
     @Test
     public void morseCodeToEng() {
         Converter converter = new Converter();
-        String myMorseCode = ".-";
-        String expected = "a";
+        String myMorseCode = ".";
+        String expected = "e";
 
         String actual = converter.getEngChar(myMorseCode);
 
@@ -42,8 +40,8 @@ public class Testklass {
     @Test
     public void upperCharEngToMorseCode() {
         Converter converter = new Converter();
-        String myEngChar = "Z";
-        String expected = "--..";
+        String myEngChar = "E";
+        String expected = ".";
 
         String actual = converter.getMorseCode(myEngChar);
 
@@ -53,8 +51,8 @@ public class Testklass {
     @Test
     public void wordEngToMorse() {
         Converter converter = new Converter();
-        String myEngWord = "ABC";
-        String expected = ".- -... -.-. ";
+        String myEngWord = "HEJ";
+        String expected = ".... . .---";
 
         String actual = converter.getMorseWord(myEngWord);
 
@@ -64,8 +62,8 @@ public class Testklass {
     @Test
     public void wordMorseToEng() {
         Converter converter = new Converter();
-        String myMorseWord = ".- -... -.-.";
-        String expected = "abc";
+        String myMorseWord = ".... . .---";
+        String expected = "hej";
 
         String actual = converter.getEngWord(myMorseWord);
 
@@ -93,5 +91,4 @@ public class Testklass {
 
         assertEquals(expected, actual);
     }
-
 }

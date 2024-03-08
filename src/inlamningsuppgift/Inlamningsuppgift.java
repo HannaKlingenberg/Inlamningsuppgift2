@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 public class Inlamningsuppgift {
 
+    public static String ask(String question) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println(question);
+        return scan.nextLine();
+    }
 
     public void charToMorse() {
         Converter converter = new Converter();
@@ -25,31 +30,28 @@ public class Inlamningsuppgift {
         Converter converter = new Converter();
         boolean keepgoing = true;
 
-        keepgoing = true; // keepgoing måste sättas till true igen
         while (keepgoing) {
             String myMorseCode = ask("Please write some morse code.");
             if (converter.getEngChar(myMorseCode) == null) {
                 System.out.println("Sorry, that didn't work. Please try again.");
             } else {
                 System.out.println("Your morse code corresponds to " + converter.getEngChar(myMorseCode) +
-                        " in the english alphabet.");
+                        " in the English alphabet.");
                 keepgoing = false;
             }
         }
     }
 
-
     public void wordToMorse() {
         Converter converter = new Converter();
         boolean keepgoing = true;
 
-        keepgoing = true;
         while (keepgoing) {
             String myEngWord = ask("Please write a word in English.");
             if (converter.getMorseWord(myEngWord) == null) {
                 System.out.println("Sorry, that didn't work. Please try again.");
             } else {
-                System.out.println("Your word corresponds to " + converter.getMorseWord(myEngWord));
+                System.out.println("Your word corresponds to " + converter.getMorseWord(myEngWord ));
                 keepgoing = false;
             }
         }
@@ -59,22 +61,15 @@ public class Inlamningsuppgift {
         Converter converter = new Converter();
         boolean keepgoing = true;
 
-        keepgoing = true;
         while (keepgoing) {
             String myMorseWord = ask("Please write a word in Morse Code, separate code with ' '.");
             if (converter.getEngWord(myMorseWord) == null) {
                 System.out.println("Sorry, that didn't work. Please try again.");
             } else {
-                System.out.println("Your word corresponds to " + converter.getEngWord(myMorseWord));
+                System.out.println("Your word corresponds to " + converter.getEngWord(myMorseWord) +".");
                 keepgoing = false;
             }
         }
-    }
-
-    public static String ask(String question) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println(question);
-        return scan.nextLine();
     }
 
     public static void main(String[] args) {
@@ -87,7 +82,6 @@ public class Inlamningsuppgift {
             uppgift.morseToWord();
 
         } catch (NoSuchElementException e) { // Felhantering av input som signalerar att det inte kommer komma mer input
-            System.out.println(e);
             System.out.println("Ooooppps, you broke it, bye bye!");
         }
     }

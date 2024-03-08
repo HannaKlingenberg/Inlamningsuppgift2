@@ -55,7 +55,7 @@ public class Converter {
         }
     }
 
-   public String toLower(String myEngChar) { // byter ut versal mot motsvarande gemen
+    public String toLower(String myEngChar) { // byter ut versal mot motsvarande gemen
         return myEngChar.toLowerCase(); // returnerar värdet
     }
 
@@ -91,8 +91,8 @@ public class Converter {
 
             }
         }
-        //returnera
-        return morseWord;
+        //returnera utan sista mellanslaget
+        return morseWord.trim();
     }
 
     public String getEngWord(String myMorseWord) {
@@ -112,5 +112,4 @@ public class Converter {
 
         return engWord;
     }
-
 }
